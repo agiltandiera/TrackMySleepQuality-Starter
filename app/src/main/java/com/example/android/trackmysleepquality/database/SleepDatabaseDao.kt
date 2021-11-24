@@ -28,9 +28,8 @@ interface SleepDatabaseDao {
     @Update
     fun update(night: SleepNight)
 
-    @Query
+    @Query("SELECT * from daily_sleep_quality_table WHERE nightId = :key")
     fun get(key: Long): SleepNight?
-    ("SELECT * from daily_sleep_quality_table WHERE nightId = :key")
 
     @Query("DELETE FROM daily_sleep_quality_table")
     fun clear()
@@ -40,4 +39,6 @@ interface SleepDatabaseDao {
 
     @Query("SELECT * FROM daily_sleep_quality_table ORDER BY nightId DESC")
     fun getAllNights(): LiveData<List<SleepNight>>
+
+
 }
